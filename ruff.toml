@@ -1,0 +1,10 @@
+# Lint settings for ml/, airflow/, tests/ and infrastructure/lambda (backend/ has its own pyproject.toml).
+line-length = 132
+target-version = "py311"
+
+[lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["B905", "UP007", "B008"]
+
+[lint.isort]
+known-first-party = ["app", "sentinel_ml", "sentinel_connectors", "tests"]

@@ -1,0 +1,93 @@
+# Subset of the AWS "Operational Best Practices for HIPAA Security" conformance pack covering the
+# controls SentinelHealth relies on. Replace with the full AWS-published template for audits.
+Resources:
+  RdsStorageEncrypted:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: rds-storage-encrypted
+      Source: { Owner: AWS, SourceIdentifier: RDS_STORAGE_ENCRYPTED }
+  RdsInstancePublicAccessCheck:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: rds-instance-public-access-check
+      Source: { Owner: AWS, SourceIdentifier: RDS_INSTANCE_PUBLIC_ACCESS_CHECK }
+  RdsMultiAz:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: rds-multi-az-support
+      Source: { Owner: AWS, SourceIdentifier: RDS_MULTI_AZ_SUPPORT }
+  S3BucketSSEEnabled:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: s3-bucket-server-side-encryption-enabled
+      Source: { Owner: AWS, SourceIdentifier: S3_BUCKET_SERVER_SIDE_ENCRYPTION_ENABLED }
+  S3BucketSSLRequestsOnly:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: s3-bucket-ssl-requests-only
+      Source: { Owner: AWS, SourceIdentifier: S3_BUCKET_SSL_REQUESTS_ONLY }
+  S3BucketPublicReadProhibited:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: s3-bucket-public-read-prohibited
+      Source: { Owner: AWS, SourceIdentifier: S3_BUCKET_PUBLIC_READ_PROHIBITED }
+  CloudTrailEnabled:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: cloudtrail-enabled
+      Source: { Owner: AWS, SourceIdentifier: CLOUD_TRAIL_ENABLED }
+  CloudTrailLogFileValidation:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: cloud-trail-log-file-validation-enabled
+      Source: { Owner: AWS, SourceIdentifier: CLOUD_TRAIL_LOG_FILE_VALIDATION_ENABLED }
+  CloudWatchLogGroupEncrypted:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: cloudwatch-log-group-encrypted
+      Source: { Owner: AWS, SourceIdentifier: CLOUDWATCH_LOG_GROUP_ENCRYPTED }
+  OpenSearchEncryptedAtRest:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: opensearch-encrypted-at-rest
+      Source: { Owner: AWS, SourceIdentifier: OPENSEARCH_ENCRYPTED_AT_REST }
+  OpenSearchInVpcOnly:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: opensearch-in-vpc-only
+      Source: { Owner: AWS, SourceIdentifier: OPENSEARCH_IN_VPC_ONLY }
+  KmsRotationEnabled:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: cmk-backing-key-rotation-enabled
+      Source: { Owner: AWS, SourceIdentifier: CMK_BACKING_KEY_ROTATION_ENABLED }
+  AlbHttpToHttpsRedirection:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: alb-http-to-https-redirection-check
+      Source: { Owner: AWS, SourceIdentifier: ALB_HTTP_TO_HTTPS_REDIRECTION_CHECK }
+  AlbWafEnabled:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: alb-waf-enabled
+      Source: { Owner: AWS, SourceIdentifier: ALB_WAF_ENABLED }
+  VpcFlowLogsEnabled:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: vpc-flow-logs-enabled
+      Source: { Owner: AWS, SourceIdentifier: VPC_FLOW_LOGS_ENABLED }
+  GuardDutyEnabled:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: guardduty-enabled-centralized
+      Source: { Owner: AWS, SourceIdentifier: GUARDDUTY_ENABLED_CENTRALIZED }
+  IamRootAccessKeyCheck:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: iam-root-access-key-check
+      Source: { Owner: AWS, SourceIdentifier: IAM_ROOT_ACCESS_KEY_CHECK }
+  MfaEnabledForIamConsoleAccess:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: mfa-enabled-for-iam-console-access
+      Source: { Owner: AWS, SourceIdentifier: MFA_ENABLED_FOR_IAM_CONSOLE_ACCESS }

@@ -1,0 +1,22 @@
+[project]
+name = "sentinelhealth-api"
+version = "0.1.0"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 132
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "ASYNC"]
+ignore = ["S101", "B008", "S311", "UP007", "B905"]
+
+[tool.ruff.lint.per-file-ignores]
+"alembic/versions/*" = ["E501"]
+"app/db/knowledge_seed.py" = ["E501"]  # prose documents
+"app/core/config.py" = ["S105"]  # insecure default is rejected outside local/test by a validator
+"app/schemas/__init__.py" = ["S105"]  # token_type="bearer" is not a secret
+
+[tool.ruff.lint.isort]
+known-first-party = ["app", "sentinel_ml"]
+known-third-party = ["alembic"]

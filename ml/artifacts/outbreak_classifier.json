@@ -1,0 +1,24 @@
+{
+  "name": "outbreak_classifier",
+  "file": "outbreak_classifier.joblib",
+  "sha256": "2d8c85bc21aa9f307db29d8f1af8d7f0cfe74c9398b67dad6c138f379bab2862",
+  "library_version": "0.1.0",
+  "created_at": "2026-10-26T19:57:46.965170+00:00",
+  "test_start": "2025-01-01",
+  "features": [
+    "cases_ratio_7_28",
+    "cases_zscore",
+    "cases_growth_7",
+    "incidence_7d_per_100k",
+    "ed_ratio_7_28",
+    "ed_growth_7",
+    "admissions_ratio_7_28",
+    "positivity_ma7",
+    "positivity_delta_7",
+    "otc_ratio_7_28",
+    "wastewater_ratio_7_28",
+    "wastewater_growth_7",
+    "neighbor_ratio_7_28"
+  ],
+  "roc_auc": 0.9637736721362257
+}

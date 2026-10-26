@@ -1,0 +1,7 @@
+apache-airflow-providers-postgres>=5.13
+apache-airflow-providers-common-sql>=1.20
+apache-airflow-providers-amazon>=9.0
+httpx>=0.27
+pandas>=2.2
+pyarrow>=16.0
+boto3>=1.35

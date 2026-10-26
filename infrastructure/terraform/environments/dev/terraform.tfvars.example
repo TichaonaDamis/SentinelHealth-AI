@@ -1,0 +1,20 @@
+# Copy to terraform.tfvars and fill in. Never commit real values.
+region                     = "us-east-1"
+vpc_cidr                   = "10.40.0.0/16"
+single_nat_gateway         = true
+domain_name                = "sentinel-dev.example-health.org"
+certificate_arn            = "arn:aws:acm:us-east-1:111111111111:certificate/REPLACE_ME"
+image_tag                  = "REPLACE_WITH_GIT_SHA"
+ses_sender                 = "alerts-dev@example-health.org"
+opensearch_master_role_arn = "arn:aws:iam::111111111111:role/SentinelOpenSearchAdmin"
+ops_emails                 = ["platform-oncall@example-health.org"]
+
+api_min_tasks             = 1
+api_max_tasks             = 4
+web_min_tasks             = 1
+db_instance_class         = "db.t4g.large"
+db_multi_az               = false
+db_read_replicas          = 0
+opensearch_instance_type  = "t3.medium.search"
+opensearch_instance_count = 1
+mwaa_environment_class    = "mw1.small"
