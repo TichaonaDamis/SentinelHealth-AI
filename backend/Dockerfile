@@ -12,7 +12,8 @@ COPY ml ml
 RUN python -m venv /opt/venv && /opt/venv/bin/pip install -r backend/requirements.txt ./ml
 
 FROM python:3.12-slim AS runtime
-RUN apt-get update && apt-get install -y --no-install-recommends libgomp1 \
+# Apply Debian security updates so the image does not ship known-fixed CVEs.
+RUN apt-get update && apt-get upgrade -y && apt-get install -y --no-install-recommends libgomp1 \
     && rm -rf /var/lib/apt/lists/* \
     && useradd --uid 10001 --create-home --shell /usr/sbin/nologin sentinel
 ENV PATH=/opt/venv/bin:$PATH \

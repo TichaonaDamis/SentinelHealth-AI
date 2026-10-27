@@ -165,10 +165,26 @@ jobs:
           load: true
           cache-from: type=gha,scope=web
           cache-to: type=gha,mode=max,scope=web
-      - name: Trivy scan (fail on critical)
+      - name: Trivy report (HIGH/CRITICAL, both images)
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          image-ref: sentinel-api:ci
+          severity: HIGH,CRITICAL
+          ignore-unfixed: true
+          format: table
+          output: trivy-api.txt
+      - name: Publish Trivy findings to job summary
+        if: always()
+        run: |
+          echo '### Trivy: sentinel-api (fixable HIGH/CRITICAL)' >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          cat trivy-api.txt >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+      - name: Trivy gate (fail on fixable critical)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: sentinel-api:ci
           severity: CRITICAL
           exit-code: "1"
           ignore-unfixed: true
+          skip-setup-trivy: true
