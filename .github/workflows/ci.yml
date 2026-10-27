@@ -165,21 +165,22 @@ jobs:
           load: true
           cache-from: type=gha,scope=web
           cache-to: type=gha,mode=max,scope=web
-      - name: Trivy report (HIGH/CRITICAL, both images)
+      - name: Trivy report (HIGH/CRITICAL)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
           image-ref: sentinel-api:ci
           severity: HIGH,CRITICAL
           ignore-unfixed: true
-          format: table
-          output: trivy-api.txt
-      - name: Publish Trivy findings to job summary
+          format: json
+          output: trivy-api.json
+      - name: Publish Trivy findings (summary + annotations)
         if: always()
         run: |
-          echo '### Trivy: sentinel-api (fixable HIGH/CRITICAL)' >> "$GITHUB_STEP_SUMMARY"
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
-          cat trivy-api.txt >> "$GITHUB_STEP_SUMMARY" || true
-          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          jq -r '.Results[]? | .Target as $t | .Vulnerabilities[]? |
+                 "\(.Severity) \(.VulnerabilityID) \(.PkgName) \(.InstalledVersion) -> \(.FixedVersion) [\($t)]"' \
+            trivy-api.json | sort -u > trivy-api.txt || true
+          { echo '### Trivy: sentinel-api (fixable HIGH/CRITICAL)'; echo '```'; cat trivy-api.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          grep '^CRITICAL' trivy-api.txt | head -40 | while read -r line; do echo "::warning title=Trivy::$line"; done
       - name: Trivy gate (fail on fixable critical)
         uses: aquasecurity/trivy-action@v0.36.0
         with:
