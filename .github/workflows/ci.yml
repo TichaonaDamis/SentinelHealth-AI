@@ -192,3 +192,6 @@ jobs:
           exit-code: "1"
           ignore-unfixed: true
           skip-setup-trivy: true
+          # Secrets in our source are covered by gitleaks; image secret scanning flags SDK source
+          # (e.g. "service_account" type definitions in third-party packages) as false positives.
+          scanners: vuln
